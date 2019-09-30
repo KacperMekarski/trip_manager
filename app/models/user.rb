@@ -4,4 +4,6 @@ class User < ApplicationRecord
   validates :born_year, :only_integer, :greater_than 1920
   validates :email, :nick, uniqueness: true
 
+  has_and_belongs_to_many :holidays
+
 end
