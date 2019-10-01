@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_201059) do
+ActiveRecord::Schema.define(version: 2019_10_01_192409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contractors", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "role", null: false, comment: "accomodation, transport, restaurant, tourist guide, etc."
+    t.text "description"
+    t.string "email"
+    t.string "phone_number"
+    t.string "cost", null: false, comment: "estimated cost of service"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "trip_id"
+    t.index ["trip_id"], name: "index_contractors_on_trip_id"
+  end
 
   create_table "holidays", force: :cascade do |t|
     t.string "name", null: false
@@ -55,4 +69,5 @@ ActiveRecord::Schema.define(version: 2019_09_30_201059) do
     t.index ["id"], name: "index_users_on_id"
   end
 
+  add_foreign_key "contractors", "trips"
 end
