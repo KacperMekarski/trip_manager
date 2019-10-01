@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_192409) do
+ActiveRecord::Schema.define(version: 2019_10_01_195741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_10_01_192409) do
     t.date "planned_date", comment: "Planned date of trip during holidays"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "holiday_id"
+    t.index ["holiday_id"], name: "index_trips_on_holiday_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +72,5 @@ ActiveRecord::Schema.define(version: 2019_10_01_192409) do
   end
 
   add_foreign_key "contractors", "trips"
+  add_foreign_key "trips", "holidays"
 end
